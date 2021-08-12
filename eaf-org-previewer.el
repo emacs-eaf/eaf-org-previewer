@@ -80,7 +80,7 @@
 ;;
 
 ;;; Require
-
+(require 'ox-html)
 
 ;;; Code:
 
@@ -242,7 +242,7 @@
 (setq eaf-org-previewer-module-path (concat (file-name-directory load-file-name) "buffer.py"))
 (add-to-list 'eaf-app-module-path-alist '("org-previewer" . eaf-org-previewer-module-path))
 
-(add-to-list 'eaf-app-display-function-alist '("org-previewer" . eaf--org-preview-display))
+(add-to-list 'eaf-preview-display-function-alist '("org-previewer" . eaf--org-preview-display))
 
 (add-to-list 'eaf-app-extensions-alist '("org-previewer" . eaf-org-extension-list))
 
