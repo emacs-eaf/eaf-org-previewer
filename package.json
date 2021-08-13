@@ -1,0 +1,22 @@
+{
+  "name": "org-previewer",
+  "version": "1.0.0",
+  "description": "Org previewer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emacs-eaf/eaf-org-previewer.git"
+  },
+  "author": "Andy Stewart",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/emacs-eaf/eaf-org-previewer/issues"
+  },
+  "homepage": "https://github.com/emacs-eaf/eaf-org-previewer#readme",
+  "dependencies": {
+    "darkreader": "^4.9.34"
+  }
+}
