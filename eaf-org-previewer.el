@@ -188,6 +188,10 @@
   "The extension list of org previewer application."
   :type 'cons)
 
+(defvar eaf-org-file-list '())
+
+(defvar eaf-org-killed-file-list '())
+
 (defun eaf--org-delete-preview-file (org-file)
   "Delete the org-preview file when given ORG-FILE name."
   (let ((org-html-file (concat (file-name-sans-extension org-file) ".html")))
@@ -240,6 +244,13 @@
     ;; Switch to new buffer if buffer create successful.
     (switch-to-buffer buf)
     (other-window +1)))
+
+(add-hook 'eaf-stop-process-hook
+          #'(lambda ()
+              (dolist (org-file-name eaf-org-file-list)
+                (eaf--org-delete-preview-file org-file-name))
+              (setq eaf-org-file-list nil)
+              (setq eaf-org-killed-file-list nil)))
 
 (add-to-list 'eaf-app-binding-alist '("org-previewer" . eaf-org-previewer-keybinding))
 
