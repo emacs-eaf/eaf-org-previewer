@@ -179,6 +179,10 @@
   "The keybinding of EAF Org Previewer."
   :type 'cons)
 
+(defcustom eaf-org-dark-mode "follow"
+  ""
+  :type 'string)
+
 (defcustom eaf-org-extension-list
   '("org")
   "The extension list of org previewer application."

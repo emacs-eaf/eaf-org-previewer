@@ -19,9 +19,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from PyQt5 import QtCore
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QColor
 from core.webengine import BrowserBuffer
+from core.utils import get_emacs_var
 import os
 
 class AppBuffer(BrowserBuffer):
@@ -30,7 +32,27 @@ class AppBuffer(BrowserBuffer):
 
         self.url = url
 
+        self.dark_mode = False
+        if (get_emacs_var("eaf-org-dark-mode") == "force" or \
+            get_emacs_var("eaf-org-dark-mode") == True or \
+            (get_emacs_var("eaf-org-dark-mode") == "follow" and get_emacs_var("eaf-emacs-theme-mode") == "dark")):
+            self.dark_mode = True
+
+        self.buffer_widget.dark_mode_js = open(os.path.join(os.path.dirname(__file__),
+                                                            "node_modules",
+                                                            "darkreader",
+                                                            "darkreader.js")).read()
+
+        self.buffer_widget.loadProgress.connect(self.update_progress)
+
         self.load_org_html_file()
+
+    @QtCore.pyqtSlot(int)
+    def update_progress(self, progress):
+        # We need load dark mode js always, otherwise will white flash when loading page.
+        if self.dark_mode:
+            self.buffer_widget.load_dark_mode_js()
+            self.buffer_widget.enable_dark_mode()
 
     def load_org_html_file(self):
         self.buffer_widget.setUrl(QUrl.fromLocalFile(os.path.splitext(self.url)[0]+".html"))
