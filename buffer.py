@@ -33,9 +33,10 @@ class AppBuffer(BrowserBuffer):
         self.url = url
 
         self.dark_mode = False
-        if (get_emacs_var("eaf-org-dark-mode") == "force" or \
-            get_emacs_var("eaf-org-dark-mode") == True or \
-            (get_emacs_var("eaf-org-dark-mode") == "follow" and get_emacs_var("eaf-emacs-theme-mode") == "dark")):
+        dark_mode = get_emacs_var("eaf-org-dark-mode")
+        if (dark_mode == "force" or \
+            dark_mode == True or \
+            (dark_mode == "follow" and self.theme_mode == "dark")):
             self.dark_mode = True
 
         self.buffer_widget.dark_mode_js = open(os.path.join(os.path.dirname(__file__),
