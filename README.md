@@ -10,6 +10,14 @@ This repository provides the EAF Org Previewer application for the [Emacs Applic
 (require 'eaf-org-previewer)
 ```
 
+### Invoking/Using
+
+To use this previewer, which will open a preview of an org-mode file as HTML, run:
+
+`M-x eaf-open`
+
+Then select the org file you want to preview.  This information is also available on the [EAF Repo Readme](https://github.com/emacs-eaf/emacs-application-framework#launch-eaf-applications)
+
 ### The keybinding of EAF Org Previewer.
 
 | Key   | Event   |
