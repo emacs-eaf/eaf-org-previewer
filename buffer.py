@@ -23,7 +23,7 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QColor
 from core.webengine import BrowserBuffer
-from core.utils import get_emacs_var
+from core.utils import get_emacs_var, get_app_dark_mode
 import os
 
 class AppBuffer(BrowserBuffer):
@@ -32,12 +32,7 @@ class AppBuffer(BrowserBuffer):
 
         self.url = url
 
-        self.dark_mode = False
-        dark_mode = get_emacs_var("eaf-org-dark-mode")
-        if (dark_mode == "force" or \
-            dark_mode == True or \
-            (dark_mode == "follow" and self.theme_mode == "dark")):
-            self.dark_mode = True
+        self.dark_mode = get_app_dark_mode("eaf-org-dark-mode")
 
         self.buffer_widget.dark_mode_js = open(os.path.join(os.path.dirname(__file__),
                                                             "node_modules",
