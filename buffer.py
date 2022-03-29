@@ -19,9 +19,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from PyQt5 import QtCore
-from PyQt5.QtCore import QUrl
-from PyQt5.QtGui import QColor
+from PyQt6 import QtCore
+from PyQt6.QtCore import QUrl
+from PyQt6.QtGui import QColor
 from core.webengine import BrowserBuffer
 from core.utils import get_emacs_var, get_app_dark_mode
 import os
