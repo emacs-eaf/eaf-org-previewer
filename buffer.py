@@ -34,21 +34,9 @@ class AppBuffer(BrowserBuffer):
 
         self.dark_mode = get_app_dark_mode("eaf-org-dark-mode")
 
-        self.buffer_widget.dark_mode_js = open(os.path.join(os.path.dirname(__file__),
-                                                            "node_modules",
-                                                            "darkreader",
-                                                            "darkreader.js")).read()
-
-        self.buffer_widget.loadProgress.connect(self.update_progress)
+        self.buffer_widget.init_dark_mode_js(__file__)
 
         self.load_org_html_file()
-
-    @QtCore.pyqtSlot(int)
-    def update_progress(self, progress):
-        # We need load dark mode js always, otherwise will white flash when loading page.
-        if self.dark_mode:
-            self.buffer_widget.load_dark_mode_js()
-            self.buffer_widget.enable_dark_mode()
 
     def load_org_html_file(self):
         self.buffer_widget.setUrl(QUrl.fromLocalFile(os.path.splitext(self.url)[0]+".html"))
