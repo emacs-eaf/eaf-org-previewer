@@ -21,7 +21,7 @@
 
 from PyQt6.QtCore import QUrl
 from core.webengine import BrowserBuffer
-from core.utils import get_app_dark_mode
+from core.utils import get_app_dark_mode, get_emacs_theme_foreground, get_emacs_theme_background, interactive
 import os
 
 class AppBuffer(BrowserBuffer):
@@ -35,6 +35,17 @@ class AppBuffer(BrowserBuffer):
         self.buffer_widget.init_dark_mode_js(__file__)
 
         self.load_org_html_file()
+
+    @interactive
+    def update_theme(self):
+        self.dark_mode = get_app_dark_mode("eaf-org-dark-mode")
+        self.theme_foreground_color = get_emacs_theme_foreground()
+        self.theme_background_color = get_emacs_theme_background()
+        self.buffer_widget.eval_js("document.body.style.background = '{}'; document.body.style.color = '{}'".format(
+            self.theme_background_color, self.theme_foreground_color))
+
+        self.load_org_html_file()
+        self.buffer_widget.reload()
 
     def load_org_html_file(self):
         self.buffer_widget.setUrl(QUrl.fromLocalFile(os.path.splitext(self.url)[0]+".html"))
