@@ -21,7 +21,7 @@
 
 from PyQt6.QtCore import QUrl
 from core.webengine import BrowserBuffer
-from core.utils import get_app_dark_mode, get_emacs_theme_foreground, get_emacs_theme_background, interactive
+from core.utils import *
 import os
 
 class AppBuffer(BrowserBuffer):
