@@ -182,6 +182,12 @@
   ""
   :type 'string)
 
+(defcustom eaf-org-text-selection-color "auto"
+  "Possible values are `auto' or a hex code `#hhhhhh' of a color.
+If it is set to `auto', then the selection color will be automatically
+configured by darkreader.js."
+  :type 'string)
+
 (defcustom eaf-org-extension-list
   '("org")
   "The extension list of org previewer application."

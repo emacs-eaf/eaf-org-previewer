@@ -29,24 +29,38 @@ class AppBuffer(BrowserBuffer):
         BrowserBuffer.__init__(self, buffer_id, url, arguments, False)
 
         self.url = url
-
-        self.dark_mode = get_app_dark_mode("eaf-org-dark-mode")
-
-        self.buffer_widget.init_dark_mode_js(__file__)
-
         self.load_org_html_file()
 
     @interactive
     def update_theme(self):
-        super().update_theme()
-        self.dark_mode = get_app_dark_mode("eaf-org-dark-mode")
-
         self.load_org_html_file()
-        self.buffer_widget.reload()
+        self.refresh_page()
 
     def load_org_html_file(self):
-        self.buffer_widget.setUrl(QUrl.fromLocalFile(os.path.splitext(self.url)[0]+".html"))
+        (self.text_selection_color,
+         self.dark_mode_theme
+         ) = get_emacs_vars(["eaf-org-text-selection-color",
+                             "eaf-org-dark-mode"])
+
+        background_color = get_emacs_theme_background()
+        foreground_color = get_emacs_theme_foreground()
+
+        self.buffer_widget.init_dark_mode_js(__file__,
+                                             self.text_selection_color,
+                                             self.dark_mode_theme,
+                                             {
+                                                 "brightness": 100,
+                                                 "constrast": 90,
+                                                 "sepia": 10,
+                                                 "mode": 0,
+                                                 "darkSchemeBackgroundColor": background_color,
+                                                 "darkSchemeForegroundColor": foreground_color})
+
+        with open(os.path.splitext(self.url)[0]+".html", "r") as f:
+            html = f.read().replace("</style>", "\n  a, p, h1, h2, h3, h4, h5, h6, li { color: " + f'''{foreground_color};''' + "}\n\n" + "  body { background: " + f'''{background_color};''' + "}\n</style>")
+
+            self.buffer_widget.setHtml(html, QUrl("file://"))
 
     def update_with_data(self, update_data):
         self.load_org_html_file()
-        self.buffer_widget.reload()
+        self.refresh_page()
