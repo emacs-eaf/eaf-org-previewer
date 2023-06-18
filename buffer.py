@@ -19,10 +19,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from PyQt6.QtCore import QUrl
-from core.webengine import BrowserBuffer
-from core.utils import *
 import os
+
+from core.utils import *
+from core.webengine import BrowserBuffer
+from PyQt6.QtCore import QUrl
+
 
 class AppBuffer(BrowserBuffer):
     def __init__(self, buffer_id, url, arguments):
