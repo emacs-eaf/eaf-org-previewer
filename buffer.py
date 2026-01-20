@@ -58,7 +58,7 @@ class AppBuffer(BrowserBuffer):
                                                  "darkSchemeBackgroundColor": background_color,
                                                  "darkSchemeForegroundColor": foreground_color})
 
-        with open(os.path.splitext(self.url)[0]+".html", "r") as f:
+        with open(os.path.splitext(self.url)[0]+".html", "r", encoding = "utf-8") as f:
             html = f.read().replace("</style>", "\n  a, p, h1, h2, h3, h4, h5, h6, li { color: " + f'''{foreground_color};''' + "}\n\n" + "  body { background: " + f'''{background_color};''' + "}\n</style>")
 
             self.buffer_widget.setHtml(html, QUrl("file://"))
