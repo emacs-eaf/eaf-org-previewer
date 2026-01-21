@@ -36,7 +36,6 @@ class AppBuffer(BrowserBuffer):
     @interactive
     def update_theme(self):
         self.load_org_html_file()
-        self.refresh_page()
 
     def load_org_html_file(self):
         (self.text_selection_color,
@@ -65,4 +64,3 @@ class AppBuffer(BrowserBuffer):
 
     def update_with_data(self, update_data):
         self.load_org_html_file()
-        self.refresh_page()
