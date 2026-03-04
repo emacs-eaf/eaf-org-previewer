@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/emacs-eaf/eaf-org-previewer#readme",
   "dependencies": {
-    "darkreader": "^4.9.34"
+    "darkreader": "^4.9.117"
   }
 }
